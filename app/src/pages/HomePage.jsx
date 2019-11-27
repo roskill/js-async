@@ -12,9 +12,16 @@ const getDataPromise = (url) => {
     let httpRequest = new XMLHttpRequest();
     httpRequest.open('GET', url);
     httpRequest.onload = () => {
-      if (httpRequest.status === 200) resolve(httpRequest.responseText);
-      else reject(Error(httpRequest.status))
-    }
+      if (httpRequest.status === 200) {
+        resolve(httpRequest.response);
+      } else {
+        reject(Error(httpRequest.statusText));
+      }
+    };
+
+    // Handle network errors
+    httpRequest.onerror = () => reject(Error('Network Error'));
+    
     httpRequest.send();  
   })
 };
@@ -24,7 +31,8 @@ const HomePage = () => {
 
   useEffect(() => {
     const bhutanId = '1252634';
-    const apiKey = '71f1013cc4a78d563d0eeaf9b93bfce8';
+    // const apiKey = '71f1013cc4a78d563d0eeaf9b93bfce8';
+    const apiKey = '';
     const url =
       `https://api.openweathermap.org/data/2.5/weather?id=${bhutanId}&appid=${apiKey}`;
   //   getData(url, data => {
@@ -32,7 +40,9 @@ const HomePage = () => {
   //   console.log(JSON.stringify(dataObj, null, 2));
   //   setWeather(dataObj);
   // });
-  getDataPromise(url).then(response => setWeather(response))
+  getDataPromise(url)
+    .then(response => setWeather(response)
+    .catch(status => console.log('Error', status)));
 }, []);
 
   return (
