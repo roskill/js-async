@@ -42,7 +42,7 @@ const HomePage = () => {
   // });
   getDataPromise(url)
     .then(response => setWeather(response))
-    .catch(status => console.log('Error', status));
+    .catch(status => console.log(status));
 }, []);
 
   return (
