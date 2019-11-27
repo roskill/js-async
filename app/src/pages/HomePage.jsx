@@ -32,9 +32,8 @@ const HomePage = () => {
   //   console.log(JSON.stringify(dataObj, null, 2));
   //   setWeather(dataObj);
   // });
-      setWeather({});
-      console.log(getDataPromise(url))
-  }, []);
+  getDataPromise(url).then(response => setWeather(response))
+}, []);
 
   return (
     <div>
