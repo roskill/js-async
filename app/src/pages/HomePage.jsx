@@ -41,8 +41,8 @@ const HomePage = () => {
   //   setWeather(dataObj);
   // });
   getDataPromise(url)
-    .then(response => setWeather(response)
-    .catch(status => console.log('Error', status)));
+    .then(response => setWeather(response))
+    .catch(status => console.log('Error', status));
 }, []);
 
   return (
