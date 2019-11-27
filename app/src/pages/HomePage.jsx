@@ -39,12 +39,16 @@ const HomePage = () => {
     setWeather({});
 
     (async () => {
-      let responses = [];
-      responses.push(await getDataPromise(urls[0]));
-      responses.push(await getDataPromise(urls[1]));
-      responses.push(await getDataPromise(urls[2]));
-      responses.push(await getDataPromise(urls[3]));
-      responses.map(response => console.log(response));
+      try {
+        let responses = [];
+        responses.push(await getDataPromise(urls[0]));
+        responses.push(await getDataPromise(urls[1]));
+        responses.push(await getDataPromise(urls[2]));
+        responses.push(await getDataPromise(urls[3]));
+        responses.map(response => console.log(response));
+      } catch (status) {
+        console.log(status);
+      }
     })();
   }, []);
 
